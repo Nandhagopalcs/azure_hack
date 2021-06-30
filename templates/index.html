@@ -1,491 +1,93 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tester</title>
-    <link rel="stylesheet" href="{{url_for('static', filename='test.css')}}" />
-    <script src="{{url_for('static', filename='countries.js')}}"></script>
-  </head>
-  <body>
-    <div class="header">
-      <h1>C-19 sound testing contribution</h1>
-      <p>
-        This web application will collect basic demographics, medical history,
-        some voice samples (whilst you read text on the screen), and a few
-        seconds of coughing. Please ensure that when recoding the sounds you are
-        in a quiet environment. We also collect, if allowed, one sample of your
-        location.
-      </p>
-      <p>
-        The participation in this study is purely voluntary and the details
-        collected will not contain any personally identifiable information.
-      </p>
-      <p>
-        The entire recording and data collection should take about 5 minutes
-        only. Please keep your device around 20 cm from your face during the
-        recording and perform the recording in a quiet environment. The
-        recording device should not be shared with others before
-        cleaning/sanitation.
-      </p>
-      <p>
-        By clicking start, you agree to our terms and conditions and provide us
-        the consent to your data solely for research and development purposes.
-      </p>
-      <p>Marked with * are mandatory columns</p>
-    </div>
-    <main>
-      <form action="">
-        <section class="basic">
-          <div class="form_inner_headings">
-            <h3>Metadata</h3>
-          </div>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>C19 Login</title>
+  <meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sign in & Sign Up Form | Vanilla Javascript</title>
+<link rel="stylesheet" href="{{ url_for('static',filename='css/style_index.css') }}">
+<script src="{{url_for('static', filename='js/script_index.js')}}"></script> 
+<link rel="icon" href="icon.png" type="image/x-icon">
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<body>
+    <div class="container">
+     
+      <div class="user signinBx">
+        <div class="formBx">
+          
+          <form action="{{ url_for('login')}}" method="POST">
 
-          <div class="user-details">
-            <div class="input-box">
-              <span class="label">1.Name</span> <br />
-              <input type="text" placeholder="Enter your name" />
-            </div>
-            <div class="input-box">
-              <span class="label">2.Age(*)</span>
-              <select>
-                <option value="" selected disabled hidden>..</option>
-                <option value="">Below 18</option>
-                <option value="">18-29</option>
-                <option value="">30-39</option>
-                <option value="">40-49</option>
-                <option value="">50-59</option>
-                <option value="">60-69</option>
-                <option value="">70-79</option>
-                <option value="">80-89</option>
-                <option value="">90 and above</option>
-              </select>
-            </div>
-            <div class="input-box">
-              <span class="label">3.Biological sex(*)</span>
-              <select>
-                <option value="" selected disabled hidden>..</option>
-                <option value="">Male</option>
-                <option value="">Female</option>
-                <option value="">Others</option>
-                <option value="">Prefer not to say</option>
-              </select>
-            </div>
-            <div class="input-box">
-              <span class="label">4.Select country(*)</span>
-              <select id="country" name="country"></select>
-            </div>
-
-            <div class="input-box">
-              <span class="label">5.State/province(*)</span>
-              <select name="state" id="state">
-                <option value="" selected="selected">
-                  Please select country first
-                </option>
-              </select>
-            </div>
-
-            <div class="input-box">
-              <span class="label">6.District(*)</span>
-              <input type="text" placeholder="Enter your district" required />
-            </div>
-
-            <div class="form_inner_headings">
-              <h3>Medical data</h3>
-            </div>
-
-            <div class="input-box">
-              <span class="label"
-                >1.Do you have any of the following medical conditions?(*)</span
-              >
-              <br />
-              <label> <input type="checkbox" name="" id="" />Asthma </label>
-              <br />
-              <label>
-                <input type="checkbox" name="" id="" />Cystic fibrosis
-              </label>
-              <br />
-              <label>
-                <input type="checkbox" name="" id="" />COPD/Emphysema
-              </label>
-              <br />
-              <label>
-                <input type="checkbox" name="" id="" />Pulmonary fibrosis
-              </label>
-              <br />
-              <label> <input type="checkbox" name="" id="" />Pnuemonia </label>
-              <br />
-              <label>
-                <input type="checkbox" name="" id="" />Other lung disease
-              </label>
-              <br />
-              <label>
-                <input type="checkbox" name="" id="" />High Blood Pressure
-              </label>
-              <br />
-              <label> <input type="checkbox" name="" id="" />Angina </label>
-              <br />
-              <label>
-                <input type="checkbox" name="" id="" />Previous stroke or
-                Transient ischaemic attack
-              </label>
-              <br />
-              <label>
-                <input type="checkbox" name="" id="" />Previous heart attack
-              </label>
-              <br />
-              <label>
-                <input type="checkbox" name="" id="" />Valvular heart disease
-              </label>
-              <br />
-              <label>
-                <input type="checkbox" name="" id="" />Other heart disease
-              </label>
-              <br />
-              <label> <input type="checkbox" name="" id="" />Diabetes </label>
-              <br />
-              <label> <input type="checkbox" name="" id="" />Cancer </label>
-              <br />
-              <label>
-                <input type="checkbox" name="" id="" />Previous organ transplant
-              </label>
-              <br />
-              <label>
-                <input type="checkbox" name="" id="" />HIV or impaired immune
-                system
-              </label>
-              <br />
-              <label>
-                <input type="checkbox" name="" id="" />Other long-term condition
-              </label>
-            </div>
-            <div class="input-box">
-              <span class="label"
-                >2.Smoking habits,including e-cigarettes(*)</span
-              >
-              <select>
-                <option value="" selected disabled hidden>..</option>
-                <option value="">Current Smoker</option>
-                <option value="">Ex Smoker</option>
-                <option value="">Never used at all</option>
-                <option value="">E-cigarettes only</option>
-              </select>
-            </div>
-            <div class="input-box">
-              <span class="label">3.Vaccination status(*)</span>
-              <select>
-                <option value="" selected disabled hidden>..</option>
-                <option value="">One dose</option>
-                <option value="">Two dose</option>
-                <option value="">Not done</option>
-              </select>
-            </div>
-
-            <div class="form_inner_headings">
-              <h3>Symptoms</h3>
-            </div>
-
-            <div class="input-box">
-              <span class="label">1.Do you have any of the symptoms?(*)</span>
-              <br />
-              <label> <input type="checkbox" name="" id="" />Cold </label>
-              <br />
-              <label> <input type="checkbox" name="" id="" />Cough </label>
-              <br />
-              <label> <input type="checkbox" name="" id="" />Cough </label>
-              <br />
-              <label> <input type="checkbox" name="" id="" />Fever </label>
-              <br />
-              <label> <input type="checkbox" name="" id="" />Diarrhoea </label>
-              <br />
-              <label>
-                <input type="checkbox" name="" id="" />Sore throat
-              </label>
-              <br />
-              <label>
-                <input type="checkbox" name="" id="" />Difficulty in breathing
-              </label>
-              <br />
-              <label>
-                <input type="checkbox" name="" id="" />Dizziness, confusion or
-                vertigo
-              </label>
-              <br />
-              <label> <input type="checkbox" name="" id="" />Headache </label>
-              <br />
-              <label>
-                <input type="checkbox" name="" id="" />Running or blocked nose
-              </label>
-              <br />
-              <label>
-                <input type="checkbox" name="" id="" />Loss of taste or smell
-              </label>
-              <br />
-              <label>
-                <input type="checkbox" name="" id="" />Muscle pain
-              </label>
-              <br />
-              <label> <input type="checkbox" name="" id="" />Fatigue </label>
-            </div>
-          </div>
-        </section>
-
-        <section class="record">
-          <div class="form_inner_heading">
-            <h3>Data Recording</h3>
-            <p>
-              Ensure that you are in a quiet room for better quality of sound.
-              <br />
-              Keep the recorded device atleast 10m away from your mouth. <br />
-              Sanitise the device before further use.
+           <img src="logo.png" alt="logo" width="200" height="150"> 
+                      
+            
+            <h2>Sign In</h2>
+            <input type="text" name="user_email" placeholder="User_email" />
+            <input type="password" name="user_password" placeholder="Password" />
+            <input type="submit" name="" value="Login" />
+            <p class="signup">
+              Don't have an account ?
+              <a href="#" onclick="toggleForm();">Sign Up.</a>
             </p>
-          </div>
-          <div class="user record">
-            <div class="input-box">
-              <span class="label">1.Breathe(shallow)</span> <br />
+            <p class="contrib">
+              Want to become a contributer?<br>
+              No sign-in required                       
+              <br>(NB: only for corona positive patients)
+              <!-- <br><a href="#">Click here</a>   -->
+              <div class="proceed">
+                <form action="survey" method="post">
+                    <button  type="submit" class="proceed_btn">
+                      <i class="fas fa-arrow-circle-right"></i>
+                      Click here
+                    </button>
+                  </form>
+                </div>
+              
+            </p>
+          </form>
+          {%if invalid==1%}
+          <br>
+          <p>invalid password</p>
+          <br>
+          {%endif%}
 
-              <div id="breathshallowContainer">
-                <div class="">
-                  <div id="audioSupport"></div>
-                  <button
-                    type="button"
-                    id="recordbreathshallow"
-                    onclick="record(this, 'breathshallowContainer', 'id_audio_file_breathe_shallow')"
-                  >
-                    Record
-                  </button>
-                  <button
-                    type="button"
-                    name="stopbreathshallow"
-                    id="breathshallowStop"
-                    onclick="stopRecord('recordbreathshallow')"
-                  >
-                    Stop
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div class="input-box">
-              <span class="label">2.Breathe(deep)</span> <br />
-
-              <div id="breathdeepContainer">
-                <div class="">
-                  <div id="audioSupport"></div>
-                  <button
-                    type="button"
-                    id="recordbreathdeep"
-                    onclick="record(this, 'breathdeepContainer', 'id_audio_file_breathe_deep')"
-                  >
-                    Record
-                  </button>
-                  <button
-                    type="button"
-                    name="stopbreathdeep"
-                    id="breathdeepStop"
-                    onclick="stopRecord('recordbreathdeep')"
-                  >
-                    Stop
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div class="input-box">
-              <span class="label">3.Cough(shallow)</span> <br />
-              <div id="coughshallowContainer">
-                <div class="">
-                  <div id="audioSupport"></div>
-                  <button
-                    type="button"
-                    id="recordcoughshallow"
-                    onclick="record(this, 'coughshallowContainer', 'id_audio_file_cough_shallow')"
-                  >
-                    Record
-                  </button>
-                  <button
-                    type="button"
-                    name="stopcoughshallow"
-                    id="coughshallowStop"
-                    onclick="stopRecord('recordcoughshallow')"
-                  >
-                    Stop
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div class="input-box">
-              <span class="label">4.Cough(heavy)</span> <br />
-              <div id="coughheavyContainer">
-                <div class="">
-                  <div id="audioSupport"></div>
-                  <button
-                    type="button"
-                    id="recordcoughheavy"
-                    onclick="record(this, 'coughheavyContainer', 'id_audio_file_cough_deep')"
-                  >
-                    Record
-                  </button>
-                  <button
-                    type="button"
-                    name="stopcoughheavy"
-                    id="coughheavyStop"
-                    onclick="stopRecord('recordcoughheavy')"
-                  >
-                    Stop
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div class="input-box">
-              <span class="label">5.Vowel 'a' </span> <br />
-              <div id="aContainer">
-                <div class="">
-                  <div id="audioSupport"></div>
-                  <button
-                    type="button"
-                    id="recorda"
-                    onclick="record(this, 'aContainer', 'id_audio_file_a')"
-                  >
-                    Record
-                  </button>
-                  <button
-                    type="button"
-                    name="stopa"
-                    id="aStop"
-                    onclick="stopRecord('recorda')"
-                  >
-                    Stop
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div class="input-box">
-              <span class="label">6.Vowel 'e'</span> <br />
-              <div id="eContainer">
-                <div class="">
-                  <div id="audioSupport"></div>
-                  <button
-                    type="button"
-                    id="recorde"
-                    onclick="record(this, 'eContainer', 'id_audio_file_e')"
-                  >
-                    Record
-                  </button>
-                  <button
-                    type="button"
-                    name="stope"
-                    id="eStop"
-                    onclick="stopRecord('recorde')"
-                  >
-                    Stop
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div class="input-box">
-              <span class="label">7.Vowel 'o'</span> <br />
-              <div id="oContainer">
-                <div class="">
-                  <div id="audioSupport"></div>
-                  <button
-                    type="button"
-                    id="recordo"
-                    onclick="record(this, 'oContainer', 'id_audio_file_o')"
-                  >
-                    Record
-                  </button>
-                  <button
-                    type="button"
-                    name="stopo"
-                    id="oStop"
-                    onclick="stopRecord('recordo')"
-                  >
-                    Stop
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div class="input-box">
-              <span class="label">8.Counting(Normal)</span> <br />
-              <div id="countnormalContainer">
-                <div class="">
-                  <div id="audioSupport"></div>
-                  <button
-                    type="button"
-                    id="recordcountnormal"
-                    onclick="record(this, 'countnormalContainer', 'id_audio_file_countnormal')"
-                  >
-                    Record
-                  </button>
-                  <button
-                    type="button"
-                    name="stopcountnormal"
-                    id="countnormalStop"
-                    onclick="stopRecord('recordcountnormal')"
-                  >
-                    Stop
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div class="input-box">
-              <span class="label">9.Counting(Fast)</span> <br />
-              <div id="countfastContainer">
-                <div class="">
-                  <div id="audioSupport"></div>
-                  <button
-                    type="button"
-                    id="recordcountfast"
-                    onclick="record(this, 'countfastContainer', 'id_audio_file_countfast')"
-                  >
-                    Record
-                  </button>
-                  <button
-                    type="button"
-                    name="stopcountfast"
-                    id="countfastStop"
-                    onclick="stopRecord('recordcountfast')"
-                  >
-                    Stop
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <div class="submit">
-          <input type="button" value="Submit" />
-          <p>
-            (Please click the above button to submit the data and (warning
-            icon)sanitize the device you used for the test before sharing with
-            anyone.)
-          </p>
-          <p>
-            Thankyou for being a part of this and please share it with your
-            peer.
-          </p>
-          <p>
-            If you have any feedback about this please let us, happy to
-            improvise
-          </p>
-          <textarea
-            name="improvise"
-            id=""
-            cols="100"
-            rows="10"
-            placeholder="feedback"
-          >
-Check saved for form!(note for developer)</textarea
-          >
         </div>
-      </form>
-    </main>
-
-    <script language="javascript">
-      populateCountries("country", "state");
-      populateCountries("country2");
-      populateCountries("country2");
-    </script>
-  </body>
+      </div>
+      <div class="user signupBx">
+        <div class="formBx">
+          <form action="{{ url_for('signup')}}" method="POST">
+            <img src="logo.png" alt="logo" width="200" height="150"> 
+            <h2>Create an account</h2>
+            <input type="text" name="user_name" placeholder="Username" />
+            <input type="email" name="user_email" placeholder="Email Address" />
+            <input type="password" name="user_password" placeholder="Create Password" />
+            <input type="password" name="user_pass_check" placeholder="Confirm Password" />
+            <!-- <input type="submit" name="" value="Sign Up" /> -->
+            <button type="submit">Sign Up</button>
+            <p class="signup">
+              Already have an account ?
+              <a href="#" onclick="toggleForm();">Sign in.</a>
+            </p>
+            <p class="contrib">
+              Want to become a contributer?<br>
+              No sign-in required 
+              <br>(NB: only for corona positive patients)
+              <div class="proceed">
+                <form action="survey" method="post">
+                    <button  type="submit" class="proceed_btn">
+                      <i class="fas fa-arrow-circle-right"></i>
+                      Click here
+                    </button>
+                  </form>
+                </div>              
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+</body>
+<!-- partial -->
+  
 </html>
