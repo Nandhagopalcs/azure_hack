@@ -45,8 +45,8 @@ librosa==0.8.0
 llvmlite==0.36.0
 Markdown==3.3.4
 MarkupSafe==1.1.1
-matplotlib==3.4.2
-matplotlib-inline==0.1.2
+matplotlib
+matplotlib-inline
 mistune==0.8.4
 nbclient==0.5.3
 nbconvert==6.0.7
