@@ -12,12 +12,12 @@
     <div class="container">
         <div class="user signinBx">
           <div class="formBx">
-            <form action="">              
+            <form action="redirect">              
               <h2>Result</h2>
               <!-- fetch from backend -->
 
               <div id="bg">
-                <img width="300px" src="negative.png" alt="">
+                <img width="300px" src="{{ url_for('static',filename='negative.png') }}" alt="">
               </div>
 
               <div id="result">

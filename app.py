@@ -22,6 +22,13 @@ db = client['covid_19']
 app = Flask(__name__)
 app.secret_key="hello123"
 
+# date="2020-12-19 09:26:03.478039"
+# past = {"_id":date,"name":"sabah","state":"kerala"}
+# # current=db['current']
+# complete=db['complete']
+# # current.insert_one(past)
+# complete.insert_one(past)
+
 
 @app.route('/')
 def home():
@@ -110,7 +117,7 @@ def meta_photo():
     return render_template('main.html',user_name=session['user_name'],user_email=session['user_email'],img=file_path,data=check_user)
 
 @app.route('/covid_test', methods=['GET', 'POST'])
-def survey():
+def covid_test():
     return render_template('test-index.html')
 
 @app.route('/covid_test_index', methods=['GET', 'POST'])
@@ -424,6 +431,20 @@ def processing():
     if(pred==0):
         return render_template('negative.html')
     else:
+        now = datetime.now()
+        login=db['login']
+        existing_user = login.find_one(({"_id": session["user_email"]}))
+
+
+        
+        date = now.strftime("%d/%m/%Y %H:%M:%S")
+        past = {"_id":date,"name":session['user_name'],"state":existing_user['state']}
+        current=db['current']
+        complete=db['complete']
+        current.insert_one(past)
+        complete.insert_one(past)
+        
+
         return render_template('positive.html')
 
 
@@ -462,6 +483,7 @@ def update_image():
             check_user=0
             
         img=existing_user['image_url']
+        print(img)
         return render_template('main.html',user_name=session['user_name'],user_email=session['user_email'],img=img,data=check_user)
 
 @app.route('/update_profile', methods=['GET', 'POST'])
@@ -492,7 +514,6 @@ def update_profile():
 def update_password():
      if request.method =="POST":
         req = request.form
-        req.get("edited_name")
         edit_olds = req.get("old_password")
         edit_news = req.get("new_password")
         #
@@ -511,6 +532,69 @@ def update_password():
             img=existing_user['image_url']
         
         return render_template('main.html',user_name=session['user_name'],user_email=session['user_email'],img=img,data=check_user)
+
+##govt-side
+
+@app.route('/gov')
+def gov():
+    return render_template('govt/govlogin.html')
+
+
+
+@app.route('/govt_main', methods=['GET', 'POST'])
+def govt_main():
+    if request.method =="POST":
+        req = request.form
+        unique_id = req.get("unique_id")
+        unique_password = req.get("password")
+        print(unique_password)
+        print(unique_id)
+        admin_login=db['admin_login']
+        existing_user = admin_login.find_one(({"_id":unique_id}))
+        if existing_user['password'] == unique_password:
+            if existing_user['role']=="admin":
+                current=db['current']
+                complete=db['complete']
+                x=current.find({})
+                y=complete.find({})
+                return render_template('govt/gov.html',current=x,complete=y)
+            elif existing_user['role']=="super_admin":
+                current=db['current']
+                complete=db['complete']
+                x=current.find({})
+                y=complete.find({})
+                z=admin_login.find({})
+                return render_template('govt/supe.html',current=x,complete=y,admins=z)
+
+
+    return render_template('govt/gov.html')
+
+@app.route('/add_admin', methods=['GET', 'POST'])
+def add_admin():
+    if request.method =="POST":
+        req = request.form
+        unique_id = req.get("unique_id")
+        name = req.get("name")
+        number = req.get("number")
+        password = req.get("password")
+        role="admin"
+        admin_login=db['admin_login']
+        #
+        existing_user = admin_login.find_one(({"_id":unique_id}))
+        if existing_user is not  None:
+            return render_template('govt/supe.html',exist=1)
+        #
+        past = {"_id":unique_id,"name":name,"password":password,"phone_number":number,"role":role}
+        admin_login.insert_one(past)
+        current=db['current']
+        complete=db['complete']
+        x=current.find({})
+        y=complete.find({})
+        z=admin_login.find({})
+        return render_template('govt/supe.html',current=x,complete=y,admins=z)
+
+
+
 
 
 if __name__ == '__main__':
