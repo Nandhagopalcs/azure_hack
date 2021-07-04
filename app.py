@@ -196,56 +196,63 @@ def covid_test_survey():
 
 
 
+@app.route('/contribution', methods=['GET', 'POST'])
+def contribution():
+     return render_template('contribution/Contribution_survey.html')
+
+@app.route('/record', methods=['GET', 'POST'])
+def record():
+    if request.method =="POST":
+        req = request.form
+        user_name = req.get("user_name")
+        user_age=req.get("user_age")
+        user_sex=req.get("user_sex")
+        user_country=req.get("user_country")
+        user_state=req.get("user_state")
+        user_district=req.get('user_district')
+        asthma=req.get('asthma')
+        Cystic_fibrosis=req.get('Cystic_fibrosis')
+        COPD_Emphysema=req.get('COPD/Emphysema')
+        Pulmonary_fibrosis=req.get('Pulmonary_fibrosis')
+        Pnuemonia=req.get('Pnuemonia')
+        other_lung_disease=req.get('other_lung_disease')
+        high_blood_pressure=req.get('high_blood_pressure')
+        Angina=req.get('Angina')
+        ischaemic_attack=req.get('Previous_stroke/ischaemic_attack')
+        heart_attack=req.get('previous_heart_attack')
+        valvular_heart_disease=req.get('valvular_heart_disease')
+        other_heart_disease=req.get('other_heart_disease')
+        cancer=req.get('Cancer')
+        Diabetes=req.get('Diabetes')
+        previous_organ_transplant=req.get('previous_organ_transplant')
+        hiv_impaired_immune=req.get('hiv/impaired_immune')
+        othr_user_long_term_condition=req.get('othr_long_term_condition')
+        user_smoking=req.get('user_smoking')
+        user_vaccine_status=req.get('user_vaccine_status')
+        user_cold=req.get('user_cold')
+        user_cough=req.get('user_cough')
+        user_fever=req.get('user_fever')
+        user_diarrhoea=req.get('user_diarrhoea')
+        sore_throat=req.get('sore_throat')
+        difficulty_breathing=req.get('difficulty_breathing')
+        dizziness_confusion=req.get('dizziness/confusion')
+        headache=req.get('headache')
+        running_blocked_nose=req.get('running/blocked_nose')
+        loss_taste=req.get('loss_taste')
+        muscle_pain=req.get('muscle_pain')
+        fatique=req.get('fatique')
 
 
-# @app.route('/survey', methods=['GET', 'POST'])
-# def survey():
-#     return render_template('contribution/Contribution_survey.html')
+    return render_template('contribution/contribution_record.html')
 
-# @app.route('/record', methods=['GET', 'POST'])
-# def record():
-#     if request.method =="POST":
-#         req = request.form
-#         user_name = req.get("user_name")
-#         user_age=req.get("user_age")
-#         user_sex=req.get("user_sex")
-#         user_country=req.get("user_country")
-#         user_state=req.get("user_state")
-#         user_district=req.get('user_district')
-#         asthma=req.get('asthma')
-#         Cystic_fibrosis=req.get('Cystic_fibrosis')
-#         COPD_Emphysema=req.get('COPD/Emphysema')
-#         Pulmonary_fibrosis=req.get('Pulmonary_fibrosis')
-#         Pnuemonia=req.get('Pnuemonia')
-#         other_lung_disease=req.get('other_lung_disease')
-#         high_blood_pressure=req.get('high_blood_pressure')
-#         Angina=req.get('Angina')
-#         ischaemic_attack=req.get('Previous_stroke/ischaemic_attack')
-#         heart_attack=req.get('previous_heart_attack')
-#         valvular_heart_disease=req.get('valvular_heart_disease')
-#         other_heart_disease=req.get('other_heart_disease')
-#         cancer=req.get('Cancer')
-#         Diabetes=req.get('Diabetes')
-#         previous_organ_transplant=req.get('previous_organ_transplant')
-#         hiv_impaired_immune=req.get('hiv/impaired_immune')
-#         othr_user_long_term_condition=req.get('othr_long_term_condition')
-#         user_smoking=req.get('user_smoking')
-#         user_vaccine_status=req.get('user_vaccine_status')
-#         user_cold=req.get('user_cold')
-#         user_cough=req.get('user_cough')
-#         user_fever=req.get('user_fever')
-#         user_diarrhoea=req.get('user_diarrhoea')
-#         sore_throat=req.get('sore_throat')
-#         difficulty_breathing=req.get('difficulty_breathing')
-#         dizziness_confusion=req.get('dizziness/confusion')
-#         headache=req.get('headache')
-#         running_blocked_nose=req.get('running/blocked_nose')
-#         loss_taste=req.get('loss_taste')
-#         muscle_pain=req.get('muscle_pain')
-#         fatique=req.get('fatique')
+@app.route('/process', methods=['GET', 'POST'])
+def process():
+
+    return render_template('contribution/contribution_feedback.html')
 
 
-#     return render_template('contribution/Contribution_record.html')
+
+
 
 
 @app.route("/breath_shallow", methods=['POST', 'GET'])
